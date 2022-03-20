@@ -12,7 +12,7 @@ This library is aimed at making it type-safe to use.
 Install with npm (or you can use your favorite tool).
 
 ```shell
-npm i @yuma140902/electron-typescript-ipc
+npm i https://github.com/yuma140902/electron-typescript-ipc
 ```
 
 ## Usage
