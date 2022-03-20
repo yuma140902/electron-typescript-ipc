@@ -54,18 +54,20 @@ declare global {
 ### `preload/preload.ts`
 
 ```typescript
-import { contextBridge, ipcRenderer } from 'electron-typescript-ipc';
+import { contextBridge, IpcRenderer } from 'electron-typescript-ipc';
 import { Api } from 'path/to/api.ts';
+
+const ipcRenderer = new IpcRenderer<Api>();
 
 const api: Api = {
   invoke: {
     getDataFromStore: async (key: string) => {
-      return await ipcRenderer.invoke<Api>('getDataFromStore', key);
+      return await ipcRenderer.invoke('getDataFromStore', key);
     },
   },
   on: {
     showAlert: (listener) => {
-      ipcRenderer.on<Api>('showAlert', listener);
+      ipcRenderer.on('showAlert', listener);
     },
   },
 };
@@ -76,15 +78,19 @@ contextBridge.exposeInMainWorld('myAPI', api);
 ### `lib/main.ts`
 
 ```typescript
+import { IpcMain } from 'electron-typescript-ipc';
+import { Api } from 'path/to/api.ts';
+
 const createWindow = (): void => {
   const mainWindow = ...
 
   mainWindow.on('ready-to-show', () => {
-    ipcMain.removeHandler<Api>('getDataFromStore'); // This is essential in case you are called multiple times.
-    ipcMain.handle<Api>('getDataFromStore', async (_event, key) => {
+    const ipcMain = new IpcMain<Api>();
+    ipcMain.removeHandler('getDataFromStore'); // This is essential in case you are called multiple times.
+    ipcMain.handle('getDataFromStore', async (_event, key) => {
       return await store.get(key);
     });
-    setInterval(ipcMain.send<Api>(mainWindow, 'showAlert', 'Hi'), 10000)
+    setInterval(ipcMain.send(mainWindow, 'showAlert', 'Hi'), 10000)
   })
 }
 ```
