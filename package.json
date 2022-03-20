@@ -8,6 +8,7 @@
     "build": "rimraf dist && tsc",
     "lint": "eslint src/**/*.ts",
     "prepublishOnly": "npm run build",
+    "install": "npm run build",
     "pack:local": "npm pack",
     "link:local": "npm link"
   },
