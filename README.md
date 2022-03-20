@@ -12,12 +12,12 @@ This library is aimed at making it type-safe to use.
 Install with npm (or you can use your favorite tool).
 
 ```shell
-npm i electron-typescript-ipc
+npm i @yuma140902/electron-typescript-ipc
 ```
 
 ## Usage
 
-This library replaces `ipcRenderer.invoke`, `ipcRenderer.on`, `ipcRenderer.removeListener`, `ipcMain.handle`, `ipcMain.send`, `ipcMain.removeHandler`.
+This library replaces `ipcRenderer.invoke`, `ipcRenderer.on`, `ipcRenderer.removeListener`, `ipcMain.handle`, `ipcMain.send`, `ipcMain.removeHandler` with `IpcRenderer<T>` and `IpcMain<T>`.
 
 Then you will need to create the following two files (the directory structure is up to you)
 
@@ -33,7 +33,7 @@ See the example below for more details.
 ### `api.ts`
 
 ```typescript
-import { GetApiType } from 'electron-typescript-ipc';
+import { GetApiType } from '@yuma140902/electron-typescript-ipc';
 
 export type Api = GetApiType<
   {
@@ -54,7 +54,7 @@ declare global {
 ### `preload/preload.ts`
 
 ```typescript
-import { contextBridge, IpcRenderer } from 'electron-typescript-ipc';
+import { contextBridge, IpcRenderer } from '@yuma140902/electron-typescript-ipc';
 import { Api } from 'path/to/api.ts';
 
 const ipcRenderer = new IpcRenderer<Api>();
@@ -75,10 +75,23 @@ const api: Api = {
 contextBridge.exposeInMainWorld('myAPI', api);
 ```
 
+
+### `global.d.ts`
+
+```typescript
+import { Api } from 'path/to/api.ts';
+
+declare global {
+  interface Window {
+    myApi: Api;
+  }
+}
+```
+
 ### `lib/main.ts`
 
 ```typescript
-import { IpcMain } from 'electron-typescript-ipc';
+import { IpcMain } from '@yuma140902/electron-typescript-ipc';
 import { Api } from 'path/to/api.ts';
 
 const createWindow = (): void => {
