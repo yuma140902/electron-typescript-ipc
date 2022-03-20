@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "rimraf dist && tsc",
     "lint": "eslint src/**/*.ts",
     "prepublishOnly": "npm run build",
     "pack:local": "npm pack",
@@ -44,6 +44,7 @@
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.0",
+    "rimraf": "^3.0.2",
     "typescript": "4.3.2"
   }
 }
