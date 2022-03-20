@@ -1,6 +1,6 @@
 {
-  "name": "electron-typescript-ipc",
-  "version": "1.0.1",
+  "name": "@yuma140902/electron-typescript-ipc",
+  "version": "2.0.0",
   "description": "Library for type-safe use of contextBridge in Electron",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JichouP/electron-typescript-ipc.git"
+    "url": "git+https://github.com/yuma140902/electron-typescript-ipc.git"
   },
   "keywords": [
     "electron",
@@ -25,11 +25,12 @@
     "preload"
   ],
   "author": "JichouP",
+  "contributors": ["yuma140902"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JichouP/electron-typescript-ipc/issues"
+    "url": "https://github.com/yuma140902/electron-typescript-ipc/issues"
   },
-  "homepage": "https://github.com/JichouP/electron-typescript-ipc#readme",
+  "homepage": "https://github.com/yuma140902/electron-typescript-ipc#readme",
   "peerDependencies": {
     "electron": ">12.0.0"
   },
